@@ -1,85 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Panel de Administración TORREMAL</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            padding: 40px;
-            max-width: 800px;
-            margin: auto;
-        }
-        h1, h2 {
-            color: #d14033;
-        }
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-        }
-        input, textarea, button {
-            display: block;
-            width: 100%;
-            margin-top: 10px;
-            margin-bottom: 15px;
-            padding: 10px;
-            font-size: 16px;
-        }
-        button {
-            background-color: #d14033;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Panel de Administración – TORREMAL</title>
+  <style>
+    body { font-family: 'Palatino Linotype', serif; background: #f9f9f9; padding: 20px; }
+    h1 { color: #d14033; text-align: center; }
+    form { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 0 8px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    button { margin-top: 15px; background: #e37222; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #cf5c10; }
+  </style>
 </head>
 <body>
-    <h1>🔐 Panel de Administración TORREMAL</h1>
 
-    <form onsubmit="return enviarFormulario(event, this, 'evento')">
-        <h2>📅 Crear Evento</h2>
-        <input name="titulo" placeholder="Título del evento" required>
-        <input type="date" name="fecha" required>
-        <textarea name="descripcion" placeholder="Descripción"></textarea>
-        <input name="email" placeholder="Correo del participante (opcional)">
-        <button type="submit">Crear Evento</button>
-    </form>
+<h1>Panel de Administración TORREMAL</h1>
 
-    <form onsubmit="return enviarFormulario(event, this, 'peregrinacion')">
-        <h2>🚶‍♂️ Crear Peregrinación</h2>
-        <input name="anio" placeholder="Año" required>
-        <input name="mes" placeholder="Mes" required>
-        <input name="nombre" placeholder="Nombre de la peregrinación" required>
-        <textarea name="descripcion" placeholder="Descripción"></textarea>
-        <input name="imagen" placeholder="URL de imagen (opcional)">
-        <input name="video" placeholder="URL de video (opcional)">
-        <input name="email" placeholder="Correo del participante (opcional)">
-        <button type="submit">Crear Peregrinación</button>
-    </form>
+<h2>➕ Crear nuevo evento</h2>
+<form id="form-evento">
+  <label for="titulo">Título del evento</label>
+  <input type="text" id="titulo" name="titulo" required>
 
-    <script>
-    async function enviarFormulario(e, form, tipo) {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form));
-        const url = tipo === 'evento' ? '/crear_evento' : '/crear_peregrinacion';
-        const res = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        const result = await res.json();
-        if (result.ok) {
-            alert('✅ Guardado correctamente');
-            form.reset();
-        } else {
-            alert('❌ Error al enviar');
-        }
-    }
-    </script>
+  <label for="fecha">Fecha del evento</label>
+  <input type="date" id="fecha" name="fecha" required>
+
+  <label for="descripcion">Descripción</label>
+  <textarea id="descripcion" name="descripcion" required></textarea>
+
+  <label for="email">Email del destinatario (opcional)</label>
+  <input type="email" id="email" name="email" placeholder="ejemplo@correo.com">
+
+  <button type="submit">Crear Evento</button>
+</form>
+
+<h2>🚶 Crear nueva peregrinación</h2>
+<form id="form-peregrinacion">
+  <label for="anio">Año</label>
+  <input type="number" id="anio" name="anio" required>
+
+  <label for="mes">Mes</label>
+  <select id="mes" name="mes" required>
+    <option value="">Selecciona un mes</option>
+    <option>Enero</option><option>Febrero</option><option>Marzo</option>
+    <option>Abril</option><option>Mayo</option><option>Junio</option>
+    <option>Julio</option><option>Agosto</option><option>Septiembre</option>
+    <option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
+  </select>
+
+  <label for="nombre">Nombre de la peregrinación</label>
+  <input type="text" id="nombre" name="nombre" required>
+
+  <label for="descripcion">Descripción</label>
+  <textarea id="descripcion" name="descripcion" required></textarea>
+
+  <label for="imagen">URL de imagen (opcional)</label>
+  <input type="url" id="imagen" name="imagen">
+
+  <label for="video">URL de video (opcional)</label>
+  <input type="url" id="video" name="video">
+
+  <label for="email">Email del destinatario (opcional)</label>
+  <input type="email" id="email" name="email" placeholder="ejemplo@correo.com">
+
+  <button type="submit">Crear Peregrinación</button>
+</form>
+
+<script>
+document.getElementById("form-evento").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(this));
+  const r = await fetch("/crear_evento", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  if ((await r.json()).ok) {
+    alert("Evento creado correctamente");
+    this.reset();
+  }
+});
+
+document.getElementById("form-peregrinacion").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(this));
+  const r = await fetch("/crear_peregrinacion", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  if ((await r.json()).ok) {
+    alert("Peregrinación creada correctamente");
+    this.reset();
+  }
+});
+</script>
+
 </body>
 </html>
