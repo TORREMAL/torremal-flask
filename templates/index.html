@@ -4,10 +4,73 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Asociación Amigos de Torreciudad en Málaga</title>
-  <!-- Aquí debe ir todo el HTML completo que me pasaste -->
 </head>
 <body>
-  <h1>Bienvenidos a TORREMAL</h1>
-  <!-- El resto del contenido completo de tu página -->
+  <h1>Registro de Socios y Contacto</h1>
+
+  <h2>📝 Registro de Nuevos Socios</h2>
+  <form id="form-registro">
+    <input type="text" name="dni" placeholder="DNI" required><br>
+    <input type="text" name="nombre" placeholder="Nombre completo" required><br>
+    <input type="date" name="fecha" required><br>
+    <input type="text" name="estado_civil" placeholder="Estado civil" required><br>
+    <input type="text" name="profesion" placeholder="Profesión" required><br>
+    <input type="text" name="direccion" placeholder="Dirección fiscal" required><br>
+    <input type="email" name="email" placeholder="Correo electrónico" required><br>
+    <input type="tel" name="telefono" placeholder="Teléfono" required><br>
+    <button type="submit">Enviar registro</button>
+  </form>
+
+  <h2>📨 Contacto</h2>
+  <form id="form-contacto">
+    <select name="motivo" required>
+      <option value="Eventos">Eventos</option>
+      <option value="Peregrinaciones">Peregrinaciones</option>
+      <option value="Donaciones">Donaciones</option>
+      <option value="Otro">Otro motivo</option>
+    </select><br>
+    <textarea name="descripcion" placeholder="Descripción de la consulta" required></textarea><br>
+    <input type="text" name="nombre" placeholder="Nombre completo" required><br>
+    <input type="tel" name="telefono" placeholder="Teléfono" required><br>
+    <button type="submit">Enviar consulta</button>
+  </form>
+
+  <script>
+    document.getElementById('form-registro').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const form = new FormData(this);
+      const data = Object.fromEntries(form.entries());
+      const res = await fetch('/registro_socio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const r = await res.json();
+      if (r.ok) {
+        alert('¡Registro enviado correctamente!');
+        this.reset();
+      } else {
+        alert('Error al registrar socio.');
+      }
+    });
+
+    document.getElementById('form-contacto').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const form = new FormData(this);
+      const data = Object.fromEntries(form.entries());
+      const res = await fetch('/contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const r = await res.json();
+      if (r.ok) {
+        alert('Consulta enviada correctamente');
+        this.reset();
+      } else {
+        alert('Error al enviar la consulta.');
+      }
+    });
+  </script>
 </body>
 </html>
