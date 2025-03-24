@@ -10,13 +10,13 @@
   <style>
     body {
       font-family: 'Palatino Linotype', serif;
-      margin: 0; padding: 0;
+      margin: 0;
       background: #f9f9f9;
     }
     header {
       background: #d14033;
       color: white;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
       font-size: 1.8rem;
       font-weight: bold;
@@ -126,10 +126,10 @@
         <li><a href="#estatutos">Estatutos</a></li>
       </ul>
     </li>
-    <li><a href="#eventos">Eventos</a></li>
-    <li><a href="#peregrinaciones">Peregrinaciones</a></li>
-    <li><a href="#registro">Registro</a></li>
-    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#" onclick="mostrarModal('modal-evento')">Eventos</a></li>
+    <li><a href="#" onclick="mostrarModal('modal-peregrinacion')">Peregrinaciones</a></li>
+    <li><a href="#" onclick="mostrarModal('modal-registro')">Registro</a></li>
+    <li><a href="#" onclick="mostrarModal('modal-contacto')">Contacto</a></li>
   </ul>
 </nav>
 
@@ -147,7 +147,6 @@
   <div class="noticias-carousel">
     <img src="https://torreciudad.org/wp-content/uploads/2020/12/noticia1.jpg" alt="Noticia 1">
     <img src="https://torreciudad.org/wp-content/uploads/2020/12/noticia2.jpg" alt="Noticia 2">
-    <img src="https://torreciudad.org/wp-content/uploads/2020/12/noticia3.jpg" alt="Noticia 3">
   </div>
 </div>
 
@@ -155,30 +154,7 @@
   Asociación Amigos de Torreciudad en Málaga – © 2025 TORREMAL
 </footer>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      locale: 'es',
-      initialView: 'dayGridMonth',
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,listMonth'
-      },
-      events: [
-        { title: 'Presentación en Málaga', date: '2025-05-08' },
-        { title: 'Encuentro en Torreciudad', date: '2025-05-15' },
-        { title: 'Rosario por la Paz', date: '2025-06-10' }
-      ],
-      eventColor: '#e37222',
-      eventClick: function(info) {
-        alert('Haz clic sobre el evento: ' + info.event.title);
-      }
-    });
-    calendar.render();
-  });
-</script>
+<!-- Aquí se insertarán los modales JS (registro, contacto, etc.) en el siguiente paso -->
 
 </body>
 </html>
