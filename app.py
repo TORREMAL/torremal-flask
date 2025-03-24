@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template_string
+from flask import Flask, request, jsonify, render_template
 from datetime import datetime
 
 app = Flask(__name__)
@@ -8,28 +8,11 @@ peregrinaciones = {}
 
 @app.route("/")
 def home():
-    return render_template_string("""
-    <h1>TORREMAL - Plataforma Dinámica</h1>
-    <h2>Eventos:</h2>
-    <ul>
-    {% for evento in eventos %}
-      <li>{{ evento['titulo'] }} - {{ evento['fecha'] }}</li>
-    {% endfor %}
-    </ul>
+    return render_template("index.html", eventos=eventos, peregrinaciones=peregrinaciones)
 
-    <h2>Peregrinaciones:</h2>
-    {% for anio, meses in peregrinaciones.items() %}
-      <h3>{{ anio }}</h3>
-      {% for mes, peregrinas in meses.items() %}
-        <h4>{{ mes }}</h4>
-        <ul>
-          {% for p in peregrinas %}
-            <li>{{ p['nombre'] }} - {{ p['descripcion'] }}</li>
-          {% endfor %}
-        </ul>
-      {% endfor %}
-    {% endfor %}
-    """, eventos=eventos, peregrinaciones=peregrinaciones)
+@app.route("/admin")
+def admin():
+    return render_template("admin.html", eventos=eventos, peregrinaciones=peregrinaciones)
 
 @app.route("/crear_evento", methods=["POST"])
 def crear_evento():
