@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración TORREMAL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            padding: 40px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1, h2 {
+            color: #d14033;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        input, textarea, button {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #d14033;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔐 Panel de Administración TORREMAL</h1>
+
+    <form onsubmit="return enviarFormulario(event, this, 'evento')">
+        <h2>📅 Crear Evento</h2>
+        <input name="titulo" placeholder="Título del evento" required>
+        <input type="date" name="fecha" required>
+        <textarea name="descripcion" placeholder="Descripción"></textarea>
+        <input name="email" placeholder="Correo del participante (opcional)">
+        <button type="submit">Crear Evento</button>
+    </form>
+
+    <form onsubmit="return enviarFormulario(event, this, 'peregrinacion')">
+        <h2>🚶‍♂️ Crear Peregrinación</h2>
+        <input name="anio" placeholder="Año" required>
+        <input name="mes" placeholder="Mes" required>
+        <input name="nombre" placeholder="Nombre de la peregrinación" required>
+        <textarea name="descripcion" placeholder="Descripción"></textarea>
+        <input name="imagen" placeholder="URL de imagen (opcional)">
+        <input name="video" placeholder="URL de video (opcional)">
+        <input name="email" placeholder="Correo del participante (opcional)">
+        <button type="submit">Crear Peregrinación</button>
+    </form>
+
+    <script>
+    async function enviarFormulario(e, form, tipo) {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form));
+        const url = tipo === 'evento' ? '/crear_evento' : '/crear_peregrinacion';
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if (result.ok) {
+            alert('✅ Guardado correctamente');
+            form.reset();
+        } else {
+            alert('❌ Error al enviar');
+        }
+    }
+    </script>
+</body>
+</html>
