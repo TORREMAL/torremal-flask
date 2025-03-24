@@ -3,74 +3,182 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Asociación Amigos de Torreciudad en Málaga</title>
+  <title>TORREMAL – Asociación Amigos de Torreciudad</title>
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.js"></script>
+  <style>
+    body {
+      font-family: 'Palatino Linotype', serif;
+      margin: 0; padding: 0;
+      background: #f9f9f9;
+    }
+    header {
+      background: #d14033;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    nav {
+      background: #e37222;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    nav ul li {
+      position: relative;
+    }
+    nav ul li a {
+      display: block;
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav ul li:hover > ul {
+      display: block;
+    }
+    nav ul li ul {
+      display: none;
+      position: absolute;
+      background: #e37222;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      z-index: 1000;
+    }
+    nav ul li ul li a {
+      padding: 10px;
+      white-space: nowrap;
+    }
+    .main-container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+    .carousel {
+      flex: 1;
+      min-width: 300px;
+    }
+    .carousel img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .calendar-container {
+      flex: 1;
+      min-width: 300px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .noticias {
+      margin: 20px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 10px;
+    }
+    .noticias h2 {
+      color: #d14033;
+      margin-bottom: 10px;
+    }
+    .noticias-carousel {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+    }
+    .noticias-carousel img {
+      height: 100px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    footer {
+      background: #d14033;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Registro de Socios y Contacto</h1>
 
-  <h2>📝 Registro de Nuevos Socios</h2>
-  <form id="form-registro">
-    <input type="text" name="dni" placeholder="DNI" required><br>
-    <input type="text" name="nombre" placeholder="Nombre completo" required><br>
-    <input type="date" name="fecha" required><br>
-    <input type="text" name="estado_civil" placeholder="Estado civil" required><br>
-    <input type="text" name="profesion" placeholder="Profesión" required><br>
-    <input type="text" name="direccion" placeholder="Dirección fiscal" required><br>
-    <input type="email" name="email" placeholder="Correo electrónico" required><br>
-    <input type="tel" name="telefono" placeholder="Teléfono" required><br>
-    <button type="submit">Enviar registro</button>
-  </form>
+<header>
+  TORREMAL – Asociación Amigos de Torreciudad en Málaga
+</header>
 
-  <h2>📨 Contacto</h2>
-  <form id="form-contacto">
-    <select name="motivo" required>
-      <option value="Eventos">Eventos</option>
-      <option value="Peregrinaciones">Peregrinaciones</option>
-      <option value="Donaciones">Donaciones</option>
-      <option value="Otro">Otro motivo</option>
-    </select><br>
-    <textarea name="descripcion" placeholder="Descripción de la consulta" required></textarea><br>
-    <input type="text" name="nombre" placeholder="Nombre completo" required><br>
-    <input type="tel" name="telefono" placeholder="Teléfono" required><br>
-    <button type="submit">Enviar consulta</button>
-  </form>
+<nav>
+  <ul>
+    <li><a href="#">Quiénes Somos</a>
+      <ul>
+        <li><a href="#descripcion">Descripción</a></li>
+        <li><a href="#junta">Junta Directiva</a></li>
+        <li><a href="#estatutos">Estatutos</a></li>
+      </ul>
+    </li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#peregrinaciones">Peregrinaciones</a></li>
+    <li><a href="#registro">Registro</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
 
-  <script>
-    document.getElementById('form-registro').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const form = new FormData(this);
-      const data = Object.fromEntries(form.entries());
-      const res = await fetch('/registro_socio', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const r = await res.json();
-      if (r.ok) {
-        alert('¡Registro enviado correctamente!');
-        this.reset();
-      } else {
-        alert('Error al registrar socio.');
+<div class="main-container">
+  <div class="carousel">
+    <img src="https://torreciudad.org/wp-content/uploads/2020/12/slide1.jpg" alt="Imagen 1">
+  </div>
+  <div class="calendar-container">
+    <div id="calendar"></div>
+  </div>
+</div>
+
+<div class="noticias">
+  <h2>📰 Noticias</h2>
+  <div class="noticias-carousel">
+    <img src="https://torreciudad.org/wp-content/uploads/2020/12/noticia1.jpg" alt="Noticia 1">
+    <img src="https://torreciudad.org/wp-content/uploads/2020/12/noticia2.jpg" alt="Noticia 2">
+    <img src="https://torreciudad.org/wp-content/uploads/2020/12/noticia3.jpg" alt="Noticia 3">
+  </div>
+</div>
+
+<footer>
+  Asociación Amigos de Torreciudad en Málaga – © 2025 TORREMAL
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      locale: 'es',
+      initialView: 'dayGridMonth',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,listMonth'
+      },
+      events: [
+        { title: 'Presentación en Málaga', date: '2025-05-08' },
+        { title: 'Encuentro en Torreciudad', date: '2025-05-15' },
+        { title: 'Rosario por la Paz', date: '2025-06-10' }
+      ],
+      eventColor: '#e37222',
+      eventClick: function(info) {
+        alert('Haz clic sobre el evento: ' + info.event.title);
       }
     });
+    calendar.render();
+  });
+</script>
 
-    document.getElementById('form-contacto').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const form = new FormData(this);
-      const data = Object.fromEntries(form.entries());
-      const res = await fetch('/contacto', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const r = await res.json();
-      if (r.ok) {
-        alert('Consulta enviada correctamente');
-        this.reset();
-      } else {
-        alert('Error al enviar la consulta.');
-      }
-    });
-  </script>
 </body>
 </html>
