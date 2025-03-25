@@ -1,0 +1,50 @@
+
+<!-- Modal Quiénes somos -->
+<div class="modal" id="modal-quienes">
+  <h2>Quiénes somos</h2>
+  <p>Somos una asociación sin ánimo de lucro que fomenta la devoción a la Virgen de los Ángeles, organizando eventos y peregrinaciones al Santuario de Torreciudad.</p>
+  <h3>Junta Directiva</h3>
+  <ul>
+    <li>Presidente: José Belinchón</li>
+    <li>Vicepresidente: Jaime Díaz-Espina Gutiérrez-Mijares</li>
+    <li>Tesorero: Juan Sebastián</li>
+    <li>Secretario: Fernando Ramos</li>
+    <li>Vocal 1ª: Pilar Prados</li>
+    <li>Vocal 2ª: Guadalupe Hermoso Mesa</li>
+  </ul>
+</div>
+
+<!-- Modal Registro -->
+<div class="modal" id="modal-registro">
+  <h2>Registro de Nuevos Socios</h2>
+  <form id="form-registro">
+    <label>DNI:</label><input type="text" name="dni" required><br>
+    <label>Nombre completo:</label><input type="text" name="nombre" required><br>
+    <label>Fecha de nacimiento:</label><input type="date" name="fecha" required><br>
+    <label>Estado civil:</label><input type="text" name="estado_civil" required><br>
+    <label>Profesión:</label><input type="text" name="profesion" required><br>
+    <label>Dirección fiscal:</label><input type="text" name="direccion" required><br>
+    <label>Correo electrónico:</label><input type="email" name="email" required><br>
+    <label>Teléfono:</label><input type="tel" name="telefono" required><br><br>
+    <button type="submit">Ir a donación</button>
+  </form>
+</div>
+
+<!-- Modal Contacto -->
+<div class="modal" id="modal-contacto">
+  <h2>Contacto</h2>
+  <form id="form-contacto">
+    <label>Motivo de la consulta:</label>
+    <select name="motivo" required>
+      <option value="eventos">Eventos</option>
+      <option value="peregrinaciones">Peregrinaciones</option>
+      <option value="aportaciones">Aportaciones</option>
+      <option value="otro">Otro motivo</option>
+    </select><br><br>
+    <label>Descripción de la consulta:</label><br>
+    <textarea name="descripcion" rows="4" cols="50" required></textarea><br><br>
+    <label>Nombre:</label><input type="text" name="nombre" required><br>
+    <label>Teléfono:</label><input type="tel" name="telefono" required><br><br>
+    <button type="submit">Enviar consulta</button>
+  </form>
+</div>

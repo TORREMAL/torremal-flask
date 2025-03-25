@@ -1,0 +1,38 @@
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const calendarEl = document.getElementById('calendario');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      locale: 'es',
+      initialView: 'dayGridMonth',
+      events: [
+        { title: 'Encuentro de las Familias', start: '2025-09-13', end: '2025-09-15' },
+        { title: 'Encuentro en Torreciudad', start: '2025-05-15' },
+        { title: 'Rosario por la Paz', start: '2025-06-10' },
+        { title: 'Peregrinación Juvenil', start: '2025-07-20' },
+        { title: 'Retiro espiritual', start: '2025-09-05' },
+        { title: 'Convivencia de otoño', start: '2025-11-12' }
+      ]
+    });
+    calendar.render();
+
+    let slides = document.querySelectorAll(".carousel img");
+    let index = 0;
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 5000);
+  });
+
+  function openModal(id) {
+    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+  }
+
+  function closeModal() {
+    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+    document.getElementById('overlay').classList.remove('active');
+  }
+</script>
