@@ -1,0 +1,77 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="my-4">Panel de Administración</h1>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title mb-0">Eventos</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Gestiona los eventos de la asociación.</p>
+                            <a href="{{ url_for('admin_eventos') }}" class="btn btn-primary">Gestionar Eventos</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="card-title mb-0">Peregrinaciones</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Gestiona las peregrinaciones organizadas.</p>
+                            <a href="{{ url_for('admin_peregrinaciones') }}" class="btn btn-success">Gestionar Peregrinaciones</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="card-title mb-0">Noticias</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Gestiona las noticias que aparecen en la web.</p>
+                            <a href="{{ url_for('admin_noticias') }}" class="btn btn-info">Gestionar Noticias</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="card-title mb-0">Inscripciones</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Consulta y gestiona las inscripciones a eventos y peregrinaciones.</p>
+                            <a href="{{ url_for('admin_inscripciones') }}" class="btn btn-warning">Ver Inscripciones</a>
+                            <a href="{{ url_for('admin_exportar_inscripciones') }}" class="btn btn-secondary mt-2">Exportar a Excel</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="card-title mb-0">Registros</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Consulta los registros de nuevos amigos de Torreciudad.</p>
+                            <a href="{{ url_for('admin_registros') }}" class="btn btn-danger">Ver Registros</a>
+                            <a href="{{ url_for('admin_exportar_registros') }}" class="btn btn-secondary mt-2">Exportar a Excel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
